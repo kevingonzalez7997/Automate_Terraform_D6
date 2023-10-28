@@ -75,7 +75,7 @@ resource "aws_instance" "bankapp" {
   instance_type = "t2.medium"
   subnet_id = aws_subnet.public_1.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
-  key_name = "deploy_6"
+  key_name = "D6keyWest"
   user_data = "${file("appsetup.sh")}"
   tags = {
     Name = "WESTBankApp1"
@@ -87,7 +87,7 @@ resource "aws_instance" "bankapp2" {
   instance_type = "t2.medium"
   subnet_id = aws_subnet.public_2.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
-  key_name = "deploy_6"
+  key_name = "D6keyWest"
   user_data = "${file("appsetup.sh")}"
 
   tags = {
