@@ -17,6 +17,7 @@ pip install pip --upgrade
 pip install -r requirements.txt
 pip install mysqlclient
 pip install gunicorn
+pip install mysqlclient
 python database.py
 sleep 1
 python load_data.py
