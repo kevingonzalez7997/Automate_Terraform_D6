@@ -12,21 +12,20 @@ resource "aws_vpc" "D6_vpc_us_east" {
   }
 }
 ####################### SUBNET ##########################################
-resource "aws_subnet" "public_1" {
+resource "aws_subnet" "public_subnet1_east" {
     cidr_block = "10.0.1.0/24"
     vpc_id = aws_vpc.D6_vpc_us_east.id
     availability_zone = "us-east-1a"
     map_public_ip_on_launch = true  
 }
 
-resource "aws_subnet" "public_2" {
+resource "aws_subnet" "public_subnet2_east" {
     cidr_block = "10.0.2.0/24"
     vpc_id = aws_vpc.D6_vpc_us_east.id
     availability_zone = "us-east-1b"
     map_public_ip_on_launch = true  
 }
-
-#################### SECURITY_GROUP #######################################
+#################### SECURITY_GROUP ######################################
 resource "aws_security_group" "pub1_sercurity" {
   name ="app_and_ssh"
   description = "pub1_sercurity"
@@ -59,7 +58,7 @@ resource "aws_instance" "bankapp" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
   availability_zone = "us-east-1a" 
-  subnet_id = aws_subnet.public_1.id
+  subnet_id = aws_subnet.public_subnet1_east.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
   user_data = "${file("appsetup.sh")}"
@@ -72,16 +71,14 @@ resource "aws_instance" "bankapp2" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.medium"
   availability_zone = "us-east-1b" # Specify the desired availability zone
-  subnet_id = aws_subnet.public_2.id
+  subnet_id = aws_subnet.public_subnet2_east.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
-  user_data = "${file("appsetup.sh")}"
-
   tags = {
     Name = "EastBankApp2"
   }
 }
-####################### IGW  ###############################################################
+####################### IGW  ##########################################################
 resource "aws_internet_gateway" "D6Eastgw" {
   vpc_id = aws_vpc.D6_vpc_us_east.id
 
@@ -89,10 +86,9 @@ resource "aws_internet_gateway" "D6Eastgw" {
     Name = "D6_igw_East"
   }
 }
-
-##############################################################################################
-resource "aws_default_route_table" "route_d6" {
-  default_route_table_id = aws_vpc.deployment6_vpc_US_east.default_route_table_id
+#################################  ROUTE TABLE  #########################################
+resource "aws_default_route_table" "D6_route_east" {
+  default_route_table_id = aws_vpc.D6_vpc_us_east.default_route_table_id
    route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.D6Eastgw.id
