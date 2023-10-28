@@ -73,7 +73,7 @@ resource "aws_security_group" "pub1_sercurity" {
 resource "aws_instance" "bankapp" {
   ami           = "ami-0cbd40f694b804622"
   instance_type = "t2.medium"
-  subnet_id = aws_subnet.public_2.id
+  subnet_id = aws_subnet.public_1.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
   user_data = "${file("appsetup.sh")}"
