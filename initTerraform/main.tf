@@ -62,7 +62,7 @@ resource "aws_instance" "bankapp" {
   subnet_id = aws_subnet.public_2.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
-  user_data = "${file("bankapp_install.sh")}"
+  user_data = "${file("appsetup.sh")}"
   tags = {
     Name = "App_ec2_1"
   }
@@ -75,7 +75,7 @@ resource "aws_instance" "bankapp2" {
   subnet_id = aws_subnet.public_2.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
-  user_data = "${file("bankapp_install.sh")}"
+  user_data = "${file("appsetup.sh")}"
 
   tags = {
     Name = "App_ec2_2"
