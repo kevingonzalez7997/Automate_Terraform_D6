@@ -68,7 +68,6 @@ resource "aws_security_group" "pub1_sercurity" {
 
 }
 
-}
 #####################################EC2#################################################
 resource "aws_instance" "bankapp" {
   ami           = "ami-0cbd40f694b804622"
@@ -95,7 +94,7 @@ resource "aws_instance" "bankapp2" {
   }
 }
 #######################IGW##################################################################
-resource "aws_internet_gateway" "gw" {
+resource "aws_internet_gateway" "gw_west" {
   vpc_id = aws_vpc.deployment6_vpc_US_west.id
 
   tags = {
