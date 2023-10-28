@@ -20,7 +20,7 @@ app.secret_key = os.urandom(24)
 #engine = create_engine('sqlite:///database.db',connect_args={'check_same_thread': False},echo=True)
 #Base.metadata.bind = engine
 #db = scoped_session(sessionmaker(bind=engine))
-DATABASE_URL = 'mysql+mysqldb://admin:user1234@mydata.cbunsblealyd.us-east-1.rds.amazonaws.com/amazon?charset=utf8mb4'
+DATABASE_URL = 'mysql+mysqldb://admin:kura1234@database-1.cudvzf6wqe8m.us-east-1.rds.amazonaws.com/database-1?charset=utf8mb4'
 engine = create_engine(DATABASE_URL, pool_pre_ping=True, echo=True)
 Base.metadata.bind = engine
 db = scoped_session(sessionmaker(bind=engine))    
