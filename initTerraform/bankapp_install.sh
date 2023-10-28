@@ -9,12 +9,10 @@ sudo apt-get install -y build-essential
 sudo apt-get install -y libmysqlclient-dev
 sudo apt-get install -y python3.7-dev
 
-git clone https://github.com/kevingonzalez7997/Automate_Terraform_D6.git
-
-cd Automate_Terraform_D6
-
 python3.7 -m venv test
 source test/bin/activate
+git clone https://github.com/kevingonzalez7997/Automate_Terraform_D6.git
+cd Automate_Terraform_D6
 pip install pip --upgrade
 pip install -r requirements.txt
 pip install mysqlclient
