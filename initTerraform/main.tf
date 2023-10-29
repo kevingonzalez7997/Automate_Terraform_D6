@@ -166,7 +166,7 @@ resource "aws_security_group" "load_balancer_sg" {
   description = "Security group for the load balancer"
   vpc_id      = aws_vpc.D6_vpc_us_east.id
 
-# Since the application is accessed through 8000 
+# Since the application is accessed through 80
 # The Load balancer needs to be able to accept traffic from that port 
   ingress {
     from_port   = 80
