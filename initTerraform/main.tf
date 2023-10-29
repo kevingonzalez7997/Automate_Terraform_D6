@@ -107,6 +107,19 @@ resource "aws_lb_target_group" "app_backups_ec2" {
   port = 8000
   protocol = "HTTP"
   vpc_id = aws_vpc.D6_vpc_us_east.id
+
+ health_check {
+    enabled = true
+    path = "/"
+    port = "8000"
+    protocol = "HTTP"
+    healthy_threshold = 5
+    unhealthy_threshold = 2
+    interval = 30
+    timeout = 5
+    matcher = "200"
+  }
+
 }
 #################### EC2 ATTACHMENT TO TARGET GROUP ###########################################
 ## Once the target group resource has been created
