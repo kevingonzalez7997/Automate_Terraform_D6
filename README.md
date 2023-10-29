@@ -34,10 +34,6 @@ Jenkins, an open-source automation server, is used for building, testing, and de
 - Create credentials by entering the private key directly.
 - Save and check the [log]() to verify agent status.
 
-
-
-
-
 ### 4. Git / GitHub
 
 Git is a widely used distributed version control system (DVCS) for tracking changes in source code during software development. GitHub, a web-based platform, provides hosting for Git repositories and is one of the most popular platforms for version control and collaborative software development.
@@ -82,7 +78,7 @@ For the application, the free tier MySQL will be used.
 
 ### 8. Create appsetup.sh
 
-Since the application is manually run with bash commands, I was able to reuse the previous deployment’s install steps as my build script. The main difference is that `pip install mysqlclient` has to be installed. This script will be in the terraform file for when the resource is created the application will be deployed automatically 
+As the application is manually executed using bash commands, I could optimize the deployment process by reusing the installation steps from the previous deployment as the foundation for our build script. The key distinction lies in the addition of 'pip install mysqlclient' to the script This build script is incorporated into the Terraform file, enabling the automatic deployment of our application when the resource is created.
 
 ### 9. Jenkins Pipeline
 
@@ -96,6 +92,23 @@ GitHub is one of the most popular open-source repository platforms. The code wil
 
 
 ## Troubleshooting
-
 If there are connection issues with EC2:
-Although a default route table is created by Terraform, it still has to be attached to the Internet Gateway (IGW). Be sure to include the following:
+Although a default route table is created by Terraform it still has to be attached to the IGW. Be sure to include the following 
+- `resource "aws_default_route_table" "route5_1" {
+  default_route_table_id = aws_vpc.d5-1_vpc.default_route_table_id
+   route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+}`
+- when creating the app in appsetup.sh be sure not to use '_' character in the file name as it causes issues.
+### Optimization
+
+While the deployment is successful, there are opportunities for optimization and further enhancements. Here are some areas to consider for future improvements:
+
+- **Containerization with Docker**: Consider containerizing components of your application using Docker to further automate and streamline the deployment process. Docker images can encapsulate all dependencies and simplify the deployment workflow.
+
+- **Three-Tier Architecture**: Exploring a three-tier application architecture can enhance security and data isolation. Separating the presentation, application, and data layers can improve scalability and restrict access to sensitive data.
+
+## Conclusion
+In conclusion, this deployment successfully leveraged Terraform and Jenkins to automate infrastructure provisioning. The application now spans multiple regions, benefiting from enhanced resilience and load balancing. Jenkins streamlined our CI/CD pipeline and secured AWS key management. 
