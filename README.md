@@ -32,13 +32,13 @@ Jenkins, an open-source automation server, is used for building, testing, and de
 - Select "Launch agent via SSH" (using the previously generated key).
 - The host will be the public IP of the agent instance (Agent_ec2).
 - Create credentials by entering the private key directly.
-- Save and check the [log]() to verify agent status.
+- Save and check the [log](https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/Images/Agent_running.png) to verify agent status.
 
 ### 4. Git / GitHub
 
 Git is a widely used distributed version control system (DVCS) for tracking changes in source code during software development. GitHub, a web-based platform, provides hosting for Git repositories and is one of the most popular platforms for version control and collaborative software development.
 
-In this deployment, [git](https://github.com/kevingonzalez7997/Git_Cloning) is used to create a second branch that will host the source code for the application in the west region [branch](https://github.com/kevingonzalez7997/Secure_APP_Terraform_D5.1/blob/main/Images/Git_Multi_Branch.png). Each branch will host a single Terraform file, allowing for isolation, and changes can be made to a specific region more easily.
+In this deployment, [git](https://github.com/kevingonzalez7997/Git_Cloning) is used to create a second branch that will host the source code for the application in the west region [branch](https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/Images/MultiBranch.png). Each branch will host a single Terraform file, allowing for isolation, and changes can be made to a specific region more easily.
 
 ### 5. Application Infrastructure
 
@@ -76,7 +76,7 @@ For the application, the free tier MySQL will be used.
 - A default security group will be created, and port 3306 will be opened. This will allow the information entered on either region application to write and read to the database.
 - In order to connect them, three files will be edited with the password created, database endpoint, and database name. The database.py, load_data.py, and app.py will be edited in both branches.
 
-### 8. Create appsetup.sh
+### 8. Create [appsetup.sh](https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/initTerraform/appsetup.sh)
 
 As the application is manually executed using bash commands, I could optimize the deployment process by reusing the installation steps from the previous deployment as the foundation for our build script. The key distinction lies in the addition of 'pip install mysqlclient' to the script This build script is incorporated into the Terraform file, enabling the automatic deployment of our application when the resource is created.
 
@@ -88,7 +88,7 @@ GitHub is one of the most popular open-source repository platforms. The code wil
 - Configure Jenkins Credentials Provider as needed.
 - Copy and import the Repository URL where the application source code resides.
 - Use your GitHub username and the generated key from GitHub as your credentials.
-- Run [Build](https://github.com/kevingonzalez7997/Secure_APP_Terraform_D5.1/blob/main/Images/Jenkins_Success.png)
+- Run [Build](https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/Images/Jenkin_steps.png)
 
 
 ## Troubleshooting
