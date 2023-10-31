@@ -74,6 +74,7 @@ resource "aws_instance" "bankapp2" {
   subnet_id = aws_subnet.public_subnet2_east.id
   vpc_security_group_ids = [aws_security_group.pub1_sercurity.id]
   key_name = "deploy_6"
+  user_data = "${file("appsetup.sh")}"
   tags = {
     Name = "EastBankApp2"
   }
