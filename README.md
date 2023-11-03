@@ -7,7 +7,7 @@
 
 This deployment aims to streamline Terraform's stages using Jenkins while provisioning a banking application's infrastructure. The application now spans two regions and four Availability Zones (AZs). An application load balancer is implemented for distributing traffic, and for multi-regional support, RDS handles the database across regions.
 
-![Deployment6](Deploy6Diagram.png)
+![Deployment6](Deploy6_Diagram.png)
 ## Deployment Steps
 
 ### 1. Jenkins Infrastructure
