@@ -2,7 +2,7 @@
 provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
-  region = "us-west-1"
+  region = "us-west-2"
 }
 #########################VPC#########################################
 resource "aws_vpc" "D6_vpc_US_west" {
@@ -15,7 +15,7 @@ resource "aws_vpc" "D6_vpc_US_west" {
 resource "aws_subnet" "public_1" {
     cidr_block = "10.0.1.0/24"
     vpc_id = aws_vpc.D6_vpc_US_west.id
-    availability_zone = "us-west-1a"
+    availability_zone = "us-west-2a"
     map_public_ip_on_launch = true  
     tags = {
     Name = "PublicSubnet_West1"
@@ -26,7 +26,7 @@ resource "aws_subnet" "public_1" {
 resource "aws_subnet" "public_2" {
     cidr_block = "10.0.2.0/24"
     vpc_id = aws_vpc.D6_vpc_US_west.id
-    availability_zone = "us-west-1c"
+    availability_zone = "us-west-2b"
     map_public_ip_on_launch = true  
     tags = {
     Name = "PublicSubnet_West2"
@@ -69,11 +69,11 @@ resource "aws_security_group" "pub_sercurity_west" {
 
 #####################################EC2#################################################
 resource "aws_instance" "bankapp" {
-  ami           = "ami-0cbd40f694b804622"
+  ami           = "ami-0e83be366243f524a"
   instance_type = "t2.medium"
   subnet_id = aws_subnet.public_1.id
   vpc_security_group_ids = [aws_security_group.pub_sercurity_west.id]
-  key_name = "D6keyWest"
+  key_name = "d6"
   user_data = "${file("appsetup.sh")}"
   tags = {
     Name = "WESTBankApp1"
@@ -81,11 +81,11 @@ resource "aws_instance" "bankapp" {
 }
 
 resource "aws_instance" "bankapp2" {
-  ami           = "ami-0cbd40f694b804622"
+  ami           = "ami-0e83be366243f524a"
   instance_type = "t2.medium"
   subnet_id = aws_subnet.public_2.id
   vpc_security_group_ids = [aws_security_group.pub_sercurity_west.id]
-  key_name = "D6keyWest"
+  key_name = "d6"
   user_data = "${file("appsetup.sh")}"
 
   tags = {
