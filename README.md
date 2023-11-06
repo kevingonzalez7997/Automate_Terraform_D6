@@ -44,7 +44,7 @@ In this deployment, [git](https://github.com/kevingonzalez7997/Git_Cloning) is l
 
 ### 5. Application Infrastructure
 
-The Jenkins node previously created will use Terraform to launch two application infrastructures across two regions. Each infrastructure will include the following [resources] in the main.tf (https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/initTerraform/main.tf):
+The Jenkins node previously created will use Terraform to launch two application infrastructures across two regions. Each infrastructure will include the following [resources](https://github.com/kevingonzalez7997/Automate_Terraform_D6/blob/main/initTerraform/main.tf) in the main.tf :
 
 - 1 Virtual Private Cloud (VPC)
 - 2 Availability Zones (AZs)
